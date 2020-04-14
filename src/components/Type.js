@@ -7,8 +7,23 @@ class Type extends Component {
 
   render() {
     return (
-      <div className="Type">Type</div>
+      <div className="Type">
+        <div
+          className={ this.props.type === 'one' ? 'active' : '' }
+          onClick={ this.onClick.bind( this, 'one' ) }>
+          One Time Purchase
+        </div>
+        <div
+          className={ this.props.type === 'sub' ? 'active' : '' }
+          onClick={ this.onClick.bind( this, 'sub' ) }>
+          Subscribe & Save
+        </div>
+      </div>
     );
+  }
+
+  onClick( e, type ) {
+    this.props.onClickType( type );
   }
 }
 
