@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Type from './components/Type';
 import Quantity from './components/Quantity';
 import Frequency from './components/Frequency';
-import Button from './components/Button';
+import Submit from './components/Submit';
 
 import './styles/App.scss';
 
@@ -24,6 +24,7 @@ class App extends Component {
     this.onClickType = this.onClickType.bind( this );
     this.onClickQuantity = this.onClickQuantity.bind( this );
     this.onClickFrequency = this.onClickFrequency.bind( this );
+    this.onClickSubmit = this.onClickSubmit.bind( this );
 
     this.variants = [];
     this.state = DEFAULT_STATE;
@@ -44,7 +45,9 @@ class App extends Component {
           frequency={ this.state.frequency }
           frequencyOptions={ this.state.frequencyOptions }
           onClickFrequency={ this.onClickFrequency } />
-        <Button />
+        <Submit
+          type={ this.state.type }
+          onClickSubmit={ this.onClickSubmit } />
       </div>
     );
   }
@@ -69,7 +72,6 @@ class App extends Component {
     var frequencyOptions = [];
 
     variants.forEach( ( variant ) => {
-      console.log( variant );
       this.variants.push( variant );
       quantityOptions.push( variant.option2 );
       frequencyOptions.push( variant.option3 );
@@ -77,6 +79,7 @@ class App extends Component {
 
     quantityOptions = _.uniq( quantityOptions );
     frequencyOptions = _.uniq( frequencyOptions );
+    _.pull( frequencyOptions, 'One Time Purchase' );
 
     this.setState({
       quantityOptions,
@@ -85,7 +88,13 @@ class App extends Component {
   }
 
   onClickType( type ) {
-    this.setState( { type } );
+    var state = { type };
+    state.frequency = {
+      one: 'One Time Purchase',
+      sub: 'Monthly'
+    }[ type ];
+
+    this.setState( state );
   }
 
   onClickQuantity( quantity ) {
@@ -94,6 +103,13 @@ class App extends Component {
 
   onClickFrequency( frequency ) {
     this.setState( { frequency } );
+  }
+
+  onClickSubmit() {
+    var option2 = this.state.quantity;
+    var option3 = this.state.frequency;
+    var product = _.filter( this.variants, { option2, option3 } )[ 0 ];
+    console.log( 'product', product );
   }
 }
 
