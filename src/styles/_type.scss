@@ -1,3 +1,7 @@
 .Type {
-  
+  > div {
+    &.active {
+      color: $primary-color;
+    }
+  }
 }
