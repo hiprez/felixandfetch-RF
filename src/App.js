@@ -13,6 +13,7 @@ const DEFAULT_STATE = {
   type: 'sub',
   quantity: 'Single',
   quantityOptions: [],
+  frequency: 'Monthly',
   frequencyOptions: []
 };
 
@@ -22,6 +23,7 @@ class App extends Component {
 
     this.onClickType = this.onClickType.bind( this );
     this.onClickQuantity = this.onClickQuantity.bind( this );
+    this.onClickFrequency = this.onClickFrequency.bind( this );
 
     this.variants = [];
     this.state = DEFAULT_STATE;
@@ -37,7 +39,11 @@ class App extends Component {
           quantity={ this.state.quantity }
           quantityOptions={ this.state.quantityOptions }
           onClickQuantity={ this.onClickQuantity } />
-        <Frequency />
+        <Frequency
+          type={ this.state.type }
+          frequency={ this.state.frequency }
+          frequencyOptions={ this.state.frequencyOptions }
+          onClickFrequency={ this.onClickFrequency } />
         <Button />
       </div>
     );
@@ -84,6 +90,10 @@ class App extends Component {
 
   onClickQuantity( quantity ) {
     this.setState( { quantity } );
+  }
+
+  onClickFrequency( frequency ) {
+    this.setState( { frequency } );
   }
 }
 
