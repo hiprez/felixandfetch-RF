@@ -58,6 +58,7 @@ class App extends Component {
         var { data } = res;
         if ( !data ) { throw new Error( 'Response error.' ); return false; }
 
+        this.id = data.id;
         this._eachVariant( data );
       })
       .catch( ( err ) => {
@@ -108,8 +109,25 @@ class App extends Component {
   onClickSubmit() {
     var option2 = this.state.quantity;
     var option3 = this.state.frequency;
-    var product = _.filter( this.variants, { option2, option3 } )[ 0 ];
-    console.log( 'product', product );
+    var variant = _.filter( this.variants, { option2, option3 } )[ 0 ];
+    console.log( 'variant', variant );
+    if ( !variant ) return false;
+    var { id } = variant;
+
+    axios.post( 'https://felixandfetch.com/cart/add.js', {
+      items: [
+        {
+          id: this.id,
+          variant_id: id
+        }
+      ]
+    })
+    .then( ( res ) => {
+      console.log( res );
+    })
+    .catch( ( err ) => {
+      console.log( err );
+    });
   }
 }
 
