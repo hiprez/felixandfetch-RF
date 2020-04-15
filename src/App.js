@@ -59,11 +59,21 @@ class App extends Component {
         if ( !data ) { throw new Error( 'Response error.' ); return false; }
 
         this.id = data.id;
-        this._eachVariant( data );
+        this._cacheSelectors()
+          ._eachVariant( data )
+          ._setActive();
       })
       .catch( ( err ) => {
         console.log( err );
       });
+  }
+
+  _cacheSelectors() {
+    this.$featuredImage = document.querySelector( '.featured-image-div img' );
+    this.$priceField = document.querySelector( '.product-page--pricing .price-field .money' );
+    this.$compareAtPrice = document.querySelector( '.product-page--pricing .compare-at-price .money' );
+
+    return this;
   }
 
   _eachVariant( data ) {
@@ -86,6 +96,19 @@ class App extends Component {
       quantityOptions,
       frequencyOptions
     });
+
+    return this;
+  }
+
+  _setActive() {
+    var option2 = this.state.quantity;
+    var option3 = this.state.frequency;
+    var active = this.active = _.filter( this.variants, { option2, option3 } )[ 0 ];
+    console.log( 'active', active );
+
+    this.$featuredImage.src = active.featured_image.src;
+    this.$priceField.innerText = ( ( active.price || 0 ) / 100 ).toFixed( 2 );
+    this.$compareAtPrice.innerText = ( ( active.compare_at_price || 0 ) / 100 ).toFixed( 2 );
   }
 
   onClickType( type ) {
@@ -95,24 +118,21 @@ class App extends Component {
       sub: 'Monthly'
     }[ type ];
 
-    this.setState( state );
+    this.setState( state, this._setActive );
   }
 
   onClickQuantity( quantity ) {
-    this.setState( { quantity } );
+    this.setState( { quantity }, this._setActive );
   }
 
   onClickFrequency( frequency ) {
-    this.setState( { frequency } );
+    this.setState( { frequency }, this._setActive );
   }
 
   onClickSubmit() {
-    var option2 = this.state.quantity;
-    var option3 = this.state.frequency;
-    var variant = _.filter( this.variants, { option2, option3 } )[ 0 ];
-    console.log( 'variant', variant );
-    if ( !variant ) return false;
-    var { id } = variant;
+    var { active } = this;
+    if ( !active ) return false;
+    var { id } = active;
 
     axios.post( 'https://felixandfetch.com/cart/add.js', {
       items: [
