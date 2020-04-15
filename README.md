@@ -1,7 +1,6 @@
 # Felix & Fetch RF
 
-Named after one of the great software engineers of his time, this repo submits Shopify orders via the AJAX API.<br />
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Named after one of the great software engineers of his time, this project submits Shopify orders via the AJAX API. Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
