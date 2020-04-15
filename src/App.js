@@ -116,14 +116,12 @@ class App extends Component {
 
     axios.post( 'https://felixandfetch.com/cart/add.js', {
       items: [
-        {
-          id: this.id,
-          variant_id: id
-        }
+        { id }
       ]
     })
     .then( ( res ) => {
       console.log( res );
+      window.product.update_cart();
     })
     .catch( ( err ) => {
       console.log( err );
