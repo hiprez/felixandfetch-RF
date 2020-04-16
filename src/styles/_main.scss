@@ -1,8 +1,69 @@
 .App {
+  color: $secondary-color;
+
   .Type {
-    > div {
-      &.active {
-        color: $primary-color;
+    margin-bottom: 20px;
+    
+    .row {
+      border: 2px solid $secondary-color;
+      border-radius: 10px;
+
+      .col-6 {
+        &:first-of-type {
+          border-right: 2px solid $secondary-color;
+        }
+
+        .fa-check-circle {
+          display: none;
+          position: absolute;
+          top: -10px;
+          left: 50%;
+          color: $primary-color;
+          font-size: 20px;
+          background: #fff;
+          transform: translate(-10px,0);
+        }
+
+        > div {
+          padding: 20px;
+          font-weight: bold;
+          text-align: center;
+
+          .icon-container {
+            height: 50px;
+            width: 50px;
+            margin: 0 auto 10px auto;
+            border: 2px solid $secondary-color;
+            border-radius: 50%;
+
+            i {
+              position: relative;
+              top: 10px;
+              color: $secondary-color;
+              font-size: 25px;
+            }
+          }
+        }
+
+        &.active {
+          .fa-check-circle {
+            display: block;
+          }
+
+          > div {
+            .icon-container {
+              border: 2px solid $primary-color;
+
+              i {
+                color: $primary-color;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
