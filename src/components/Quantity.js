@@ -15,6 +15,7 @@ class Quantity extends Component {
         <div onClick={ ( e ) => { var active = !this.state.active; this.setState( { active } ); } }>
           <label>Quantity:</label>
           <div className="value">{ this.props.quantity }</div>
+          <i className={ 'fas fa-chevron-circle-' + ( this.state.active ? 'up' : 'down' ) }></i>
         </div>
         <ul style={ { display: [ 'none', 'block' ][ +this.state.active ] } }>
           { this.props.quantityOptions.map( this.eachQuantity, this ) }

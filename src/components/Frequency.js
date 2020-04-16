@@ -15,6 +15,7 @@ class Frequency extends Component {
         <div onClick={ ( e ) => { var active = !this.state.active; this.setState( { active } ); } }>
           <label>Frequency:</label>
           <div className="value">{ this.props.frequency }</div>
+          <i className={ 'fas fa-chevron-circle-' + ( this.state.active ? 'up' : 'down' ) }></i>
         </div>
         <ul style={ { display: [ 'none', 'block' ][ +this.state.active ] } }>
           { this.props.frequencyOptions.map( this.eachFrequency, this ) }

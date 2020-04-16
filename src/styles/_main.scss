@@ -1,9 +1,31 @@
 .App {
   color: $secondary-color;
 
+  *, ::after, ::before {
+    box-sizing: border-box;
+  }
+
+  .row {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  .col-6 {
+    position: relative;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    width: 100%;
+    max-width: 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
   .Type {
     margin-bottom: 20px;
-    
+
     .row {
       border: 2px solid $secondary-color;
       border-radius: 10px;
@@ -21,6 +43,7 @@
           color: $primary-color;
           font-size: 20px;
           background: #fff;
+          border-radius: 50%;
           transform: translate(-10px,0);
         }
 
@@ -64,6 +87,76 @@
         &:hover {
           cursor: pointer;
         }
+      }
+    }
+  }
+
+  .Quantity,
+  .Frequency {
+    margin-bottom: 20px;
+    border: 2px solid $secondary-color;
+    border-radius: 10px;
+
+    > div {
+      position: relative;
+      padding: 10px 50px 10px 50px;
+      font-weight: bold;
+      text-align: right;
+
+      label,
+      i {
+        position: absolute;
+      }
+
+      label {
+        top: 10px;
+        left: 10px;
+        font-weight: normal;
+      }
+
+      i {
+        top: 15px;
+        right: 10px;
+        color: $secondary-color;
+        font-size: 15px;
+      }
+    }
+
+    ul {
+      padding: 0 50px;
+      text-align: right;
+
+      li {
+        padding: 10px 0;
+        list-style: none;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .Submit {
+    text-align: center;
+
+    label {
+      font-size: .8rem;
+    }
+
+    .submit-button {
+      width: 100%;
+      max-width: 250px;
+      margin: 0 auto;
+      padding: 10px;
+      color: #fff;
+      text-align: center;
+      font-weight: bold;
+      background: $primary-color;
+      border-radius: 10px;
+
+      &:hover {
+        cursor: pointer;
       }
     }
   }

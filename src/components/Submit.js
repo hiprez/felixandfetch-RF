@@ -13,9 +13,10 @@ class Submit extends Component {
   render() {
     return (
       <div className="Submit">
-        <button onClick={ ( e ) => { this.onClick(); } }>
+        <label style={ { display: [ 'none', 'block' ][ +( 'sub' === this.props.type ) ] } }>* Easily change, cancel or reschedule</label>
+        <div className="submit-button" onClick={ ( e ) => { this.onClick(); } }>
           { TITLE_MAP[ this.props.type ] }
-        </button>
+        </div>
       </div>
     );
   }
