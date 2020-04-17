@@ -77,13 +77,12 @@ class App extends Component {
 
   _cacheSelectors() {
     this.$featuredImage = document.createElement( 'img' );
-    this.$featuredImageDiv = document.querySelector( '.featured-image-div' );
+    this.$productImages = document.querySelector( '#product_images' );
     this.$priceField = document.querySelector( '.product-page--pricing #price-field .money' );
     this.$compareAtPrice = document.querySelector( '.product-page--pricing .compare-at-price .money' );
 
-    this.$featuredImage.style = 'max-width: 100%;';
-    this.$featuredImageDiv.innerHTML = '';
-    this.$featuredImageDiv.appendChild( this.$featuredImage );
+    this.$featuredImage.style = 'width: 100%; max-width: 100%;';
+    this.$productImages.appendChild( this.$featuredImage );
 
     return this;
   }
@@ -118,8 +117,6 @@ class App extends Component {
     var active = this.active = _.filter( this.variants, { option2, option3 } )[ 0 ];
     console.log( 'active', active );
 
-    if ( window.wetheme )
-      window.wetheme.$( '.mobile-product-slider' ).flexslider( QUANTITY_MAP[ option2 ] - 1 );
     this.$featuredImage.src = active.featured_image.src;
     this.$priceField.innerText = ( ( active.price || 0 ) / 100 ).toFixed( 2 );
     this.$compareAtPrice.innerText = ( ( active.compare_at_price || 0 ) / 100 ).toFixed( 2 );

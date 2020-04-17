@@ -27,7 +27,7 @@ class Type extends Component {
             <div className="icon-container">
               <i className="fas fa-calendar-plus"></i>
             </div>
-            <div>Subscribe & Save *</div>
+            <div>Subscribe & Save*</div>
           </div>
         </div>
       </div>

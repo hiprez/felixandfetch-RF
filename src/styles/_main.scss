@@ -82,6 +82,10 @@
     border: 2px solid $secondary-color;
     border-radius: 10px;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     > div {
       position: relative;
       padding: 10px 50px 10px 50px;
