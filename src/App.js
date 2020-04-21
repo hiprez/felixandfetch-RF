@@ -11,7 +11,7 @@ import './styles/App.scss';
 
 const DEFAULT_STATE = {
   type: 'sub',
-  quantity: 'Single',
+  quantity: 'Single (1)',
   quantityOptions: [],
   frequency: 'Monthly',
   frequencyOptions: []
@@ -60,7 +60,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get( 'https://felixandfetch.com/products/joint-strength-chews-rf.js' )
+    var { protocol, hostname, pathname } = window.location;
+    var prodAPI = `${protocol}//${hostname}${pathname}.js`;
+    var devAPI = 'https://felixandfetch.com/products/joint-strength-chews-rf.js';
+
+    axios.get( prodAPI )
       .then( ( res ) => {
         var { data } = res;
         if ( !data ) { throw new Error( 'Response error.' ); return false; }
@@ -118,8 +122,9 @@ class App extends Component {
     console.log( 'active', active );
 
     this.$featuredImage.src = active.featured_image.src;
-    this.$priceField.innerText = ( ( active.price || 0 ) / 100 ).toFixed( 2 );
-    this.$compareAtPrice.innerText = ( ( active.compare_at_price || 0 ) / 100 ).toFixed( 2 );
+    this.$priceField.innerText = '$' + ( ( active.price || 0 ) / 100 ).toFixed( 2 );
+    if ( this.$compareAtPrice )
+      this.$compareAtPrice.innerText = '$' + ( ( active.compare_at_price || 0 ) / 100 ).toFixed( 2 );
   }
 
   onClickType( type ) {

@@ -1,7 +1,7 @@
 .App {
   padding: 20px 0 50px 0;
   color: $secondary-color;
-  font-size: 16px;
+  font-size: 15px;
 
   *, ::after, ::before {
     box-sizing: border-box;
@@ -34,7 +34,7 @@
       }
 
       > div {
-        padding: 20px;
+        padding: 20px 0px;
         font-weight: bold;
         text-align: center;
 
